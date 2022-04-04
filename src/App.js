@@ -2,10 +2,14 @@
 import { Formik, Form, Field } from "formik";
 import { useState } from "react";
 import './header.css'
-
+import './content.css'
+import './article.css'
 const App = ()=> {
   const [photos,setPhotos] = useState([])
+  const open = url => window.open(url)
+  
   console.log( {photos})
+
   return (
     <div>
       <header>
@@ -29,6 +33,20 @@ const App = ()=> {
 
         </Formik>
       </header>
+
+      <div className="container">
+        <div className="center">
+            {photos.map(photo =>
+              <article key={photo.id} onClick={() => open(photo.links.html)}>
+                <img src={photo.urls.regular} alt="" />
+                <p>{[photo.description, photo.alt_description].join(' -')}</p>
+              </article>
+              )}
+        </div>
+      </div>
+
+
+
     </div>
   );
 }
